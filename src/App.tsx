@@ -31,6 +31,12 @@ function App() {
     );
     console.log(id);
   };
+  const reset = () => {
+    const confirmed = window.confirm(
+      "are you sure you want to delete all the items?"
+    );
+    confirmed && setItems([]);
+  };
   return (
     <div className="app">
       <Logo />
@@ -39,6 +45,7 @@ function App() {
         listItems={items}
         onDelete={deleteItem}
         onUpdate={updateItem}
+        onReset={reset}
       />
       <Footer items={items}></Footer>
     </div>

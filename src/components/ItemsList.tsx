@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Items from "./Items";
+import "./Trip.css";
 
 interface Item {
   id: number;
@@ -12,6 +13,7 @@ interface Props {
   listItems: Item[];
   onDelete: (id: number) => void;
   onUpdate: (id: number) => void;
+  onReset: any;
 }
 
 /* const initialItems: initial[] = {[
@@ -22,10 +24,22 @@ interface Props {
 
 function ItemsList(props: Props) {
   // console.log(listItems);
+  const [sort, setSort] = useState("input");
+  let items: Item[] = props.listItems;
+
+  if (sort === "input") {
+    items = props.listItems;
+  }
+  if (sort === "description") {
+    items = items.slice().sort((a, b) => a.item.localeCompare(b.item));
+  }
+  if (sort === "packed") {
+    items = items.slice().sort((a, b) => Number(a.packed) - Number(b.packed));
+  }
   return (
     <div className="list">
       <ul>
-        {props.listItems.map((item: any) => (
+        {items.map((item: any) => (
           <Items
             key={item.id}
             item={item}
@@ -34,6 +48,14 @@ function ItemsList(props: Props) {
           ></Items>
         ))}
       </ul>
+      <div className="actions">
+        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+          <option value="input">Sort by input</option>
+          <option value="description">Sort by description </option>
+          <option value="packed">Sort by packed status</option>
+        </select>
+        <button onClick={props.onReset}>Clear list</button>
+      </div>
     </div>
   );
 }
