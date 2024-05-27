@@ -2,19 +2,36 @@ import React from "react";
 interface initial {
   item: {
     id: number;
-    description: string;
-    quantity: number;
+    item: string;
+    number: number;
     packed: boolean;
   };
+  onDelete: (id: number) => void;
+  onUpdate: (id: number) => void;
 }
 
-function Items({ item }: initial) {
+function Items(props: initial) {
+  const val = props.item.packed.toString();
   return (
     <li>
-      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
-        {item.description}
+      <input
+        type="checkbox"
+        //  value="false"
+        value={val}
+        onChange={() => props.onUpdate(props.item.id)}
+      />
+      <span
+        style={
+          props.item.packed
+            ? { textDecoration: "line-through", textDecorationColor: "red" }
+            : {}
+        }
+      >
+        {props.item.number} - {props.item.item}
       </span>
-      <button className="cross">❌</button>
+      <button className="cross" onClick={() => props.onDelete(props.item.id)}>
+        ❌
+      </button>
     </li>
   );
 }

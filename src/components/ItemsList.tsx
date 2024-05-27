@@ -1,23 +1,37 @@
 import React from "react";
 import Items from "./Items";
-interface initial {
+
+interface Item {
   id: number;
-  description: string;
-  quantity: number;
+  item: string;
+  number: number;
   packed: boolean;
 }
-const initialItems: initial[] = [
+
+interface Props {
+  listItems: Item[];
+  onDelete: (id: number) => void;
+  onUpdate: (id: number) => void;
+}
+
+/* const initialItems: initial[] = {[
   { id: 1, description: "Passports", quantity: 2, packed: false },
   { id: 2, description: "Socks", quantity: 12, packed: false },
   { id: 3, description: "charger", quantity: 12, packed: true },
-];
+]; }*/
 
-function ItemsList() {
+function ItemsList(props: Props) {
+  // console.log(listItems);
   return (
     <div className="list">
       <ul>
-        {initialItems.map((value) => (
-          <Items key={value.id} item={value}></Items>
+        {props.listItems.map((item: any) => (
+          <Items
+            key={item.id}
+            item={item}
+            onDelete={props.onDelete}
+            onUpdate={props.onUpdate}
+          ></Items>
         ))}
       </ul>
     </div>

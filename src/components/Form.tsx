@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./Trip.css";
 
-function Form() {
+function Form(props: any) {
   const [number, setNumber] = useState<number>(1);
   const [item, setItem] = useState<string>("");
   const array = Array.from({ length: 20 }, (_, i) => i + 1);
@@ -16,7 +16,10 @@ function Form() {
       packed: false,
       id: Date.now(),
     };
-    console.log(newItem);
+    props.onsubmit(newItem);
+
+    // console.log(newItem);
+    //  console.log(items);
     setItem("");
     setNumber(1);
   };
