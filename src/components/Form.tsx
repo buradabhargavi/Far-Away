@@ -28,29 +28,31 @@ function Form(props: any) {
     <>
       <form className="form" onSubmit={addItem}>
         <h3>what do you need for your 😍 trip?</h3>
-        <select
-          value={number}
-          onChange={(e) => setNumber(parseInt(e.target.value))}
-        >
-          {array.map((num) => (
-            <option value={num} key={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-        {/*  <input
+        <div className="addForm">
+          <select
+            value={number}
+            onChange={(e) => setNumber(parseInt(e.target.value))}
+          >
+            {array.map((num) => (
+              <option value={num} key={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+          {/*  <input
           type="number"
           value={number}
           onChange={numHandler}
           placeholder="num of items"
         ></input> */}
-        <input
-          type="text"
-          value={item}
-          onChange={(e) => setItem(e.target.value)}
-          placeholder="items"
-        ></input>
-        <button className="addbtn">Add</button>
+          <input
+            type="text"
+            value={item}
+            onChange={(e) => setItem(e.target.value)}
+            placeholder="items"
+          ></input>
+          <button className="addbtn">Add</button>
+        </div>
       </form>
     </>
   );
